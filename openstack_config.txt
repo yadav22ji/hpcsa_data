@@ -1,0 +1,38 @@
+OpenStack installation
+
+Step 1: Before Installation:
+
+	- setup static IP address with default gateway and public DNS
+	- network should be able to ping to internet
+
+Step 2: Disable network manager, firewall and selinux
+# systemctl disable --now firewalld NetworkManager
+# setenforce 0
+# sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
+
+Step 3: set valid hostname
+# hostnamectl set-hostname openstackcloud.example.com --static
+
+Step 4: update system packages
+# yum -y update
+# yum -y install vim wget curl telnet bash-completion
+
+Step 5: install OpenStack Train
+# yum install -y centos-release-openstack-train
+
+Step 6: install packstack
+# yum install -y openstack-packstack
+
+Step 7: run packstack
+# packstack --allinone 
+
+
+----------------------------- When installtion of packstack is successfull -----------------------------
+
+Setup 1: Login into openstack dashboard
+to get credentials
+# cat /root/keystonerc_admin
+	- username and password in plain text
+
+
+	
