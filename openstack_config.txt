@@ -1,12 +1,16 @@
+You've used 81% of your storage. … If you run out of storage, you won't be able to upload new files.Learn more
 OpenStack installation
 
 Step 1: Before Installation:
-
 	- setup static IP address with default gateway and public DNS
 	- network should be able to ping to internet
 
 Step 2: Disable network manager, firewall and selinux
-# systemctl disable --now firewalld NetworkManager
+# systemctl stop NetworkManager.service 
+# systemctl disable NetworkManager.service 
+# systemctl restart network
+# systemctl stop firewalld 
+# systemctl disable firewalld
 # setenforce 0
 # sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
 
@@ -19,7 +23,7 @@ Step 4: update system packages
 
 Step 5: install OpenStack Train
 # yum install -y centos-release-openstack-train
-
+0
 Step 6: install packstack
 # yum install -y openstack-packstack
 
@@ -33,6 +37,3 @@ Setup 1: Login into openstack dashboard
 to get credentials
 # cat /root/keystonerc_admin
 	- username and password in plain text
-
-
-	
