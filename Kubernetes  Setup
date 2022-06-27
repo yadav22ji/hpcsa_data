@@ -137,8 +137,15 @@ Step_9. Join the worker nodes to the master:
 
 # Run in Worker Nodes as "Root"
 
-kubeadm join 192.168.74.10:6443 --token l431j0.0tz0bbuu7hj64lw5 \
-        --discovery-token-ca-cert-hash sha256:1743115f18a7b8761105ff5465cd1aeed74a2e8a3f326405da61681d07fdb0e0
+edit /etc/hosts
+add entry like:
+worker_node_IP_address    worker_node_hostname
+
+AND
+
+hostnamectl -sethostname worker_node_hostname
+
+kubeadm join from previous step
 
 # Make sure to replace your tokens and IP's in the above command accordingly #
 
